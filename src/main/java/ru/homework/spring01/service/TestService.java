@@ -17,11 +17,13 @@ public class TestService {
     }	
      
     public void startTest() {
+     if (dao.EOF()) return;	
+  	
    	 System.out.println( "в Нью-Йорке свет погас давно и молоко прокисло,\r\n" + 
       		"а мне плевать, ведь все равно\r\n" + 
       		"жизнь не имеет смысла.\r\n" + 
       		"Фиби Буфе (c)\r\n" );    	
-   	 System.out.println("Тест \"Хорошо ли ты знаешь \"Друзей\"?\"");
+   	 System.out.println("Тест \"Хорошо ли ты знаешь сериал \"Друзья\"?\"");
    	 System.out.println("");
    	 int maxScore = 0;
    	 int userScore = 0;

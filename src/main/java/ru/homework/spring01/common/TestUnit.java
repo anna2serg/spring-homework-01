@@ -1,12 +1,14 @@
 package ru.homework.spring01.common;
 
-import java.util.ArrayList;
-
 public class TestUnit {
 	
     private String question;
-    private ArrayList<Answer> answerList;
+    private AnswerList answerList;
 
+    public TestUnit() {
+    	answerList = new AnswerList();
+    }
+    
     public String getQuestion() {
         return question;
     }    
@@ -15,12 +17,20 @@ public class TestUnit {
         this.question = question;
     }    
     
-    public ArrayList<Answer> getAnswerList() {
-        return answerList;
+    public int getAnswerCount() {
+        return answerList.getCount();
     }	
     
-    public void setAnswerList(ArrayList<Answer> AnswerList) {
-        this.answerList = AnswerList;
-    }     
+    public Answer getAnswer(int Index) {
+        return answerList.get(Index);
+    }	    
+    
+    public void addAnswer(Answer answer) {
+        answerList.add(answer);
+    }	    
+    
+    public boolean isMultiChoice() {
+        return answerList.isMultiChoice();
+    }	       
        
 }

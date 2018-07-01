@@ -1,6 +1,7 @@
 package ru.homework.spring01.reader;
 
 import java.io.BufferedReader;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class CSVReader {
     	
     	String row = "";
         String splitBy = ";";
-
+        
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             while ((row = br.readLine()) != null) {
             	String[] columns = row.split(splitBy);  

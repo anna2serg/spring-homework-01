@@ -18,16 +18,17 @@ public class TestBoxDao implements ITestBoxDao {
 		for (ArrayList<String> rows : raw) {
 			TestUnit tu = new TestUnit();
 			String var = "";
-			Boolean varRight = false;
-			ArrayList<Answer> ans = new ArrayList<Answer>(); 
+			Boolean varRight = false; 
 			int i = 0;
+			int c = 0;
 			for (String col : rows) {
 				String s = col.trim();
 				if (i==0) tu.setQuestion(s);
 				else {
 					if (i%2==0) {
 						varRight = s.equals("1");
-						ans.add(new Answer(var, varRight));
+						tu.addAnswer(new Answer(c+1, var, varRight));
+						c += 1;
 					}
 					else {
 						var = s;
@@ -35,7 +36,6 @@ public class TestBoxDao implements ITestBoxDao {
 				}
 				i++;
 			}		
-			tu.setAnswerList(ans);
 			TestList.add(tu);
 		}
 
@@ -49,23 +49,13 @@ public class TestBoxDao implements ITestBoxDao {
     	_TestListLoad(file);
     }
     
-    public String ToString() {
-    	String result = "";
-    	for (TestUnit tu : TestList) {
-    		result += tu.getQuestion().toString() + " " + tu.getAnswerList().toString();
-    		result += newline;
-    	}
-    	return result;
-    	
-    }
-    
     private boolean CheckIndex(int index) {
     	return ((index>0)&&(index<TestList.size()));
     }
 
 	@Override
 	public boolean EOF() {
-		return index == TestList.size() - 1;
+		return ((TestList.size() <= 0)||(index == TestList.size()));
 	}
 
 	@Override
@@ -75,11 +65,12 @@ public class TestBoxDao implements ITestBoxDao {
 
 	@Override
 	public TestUnit Next() {
+		TestUnit result = TestList.get(index);
 		index += 1;
-		return TestList.get(index);
+		return result;
 	}
 
-	@Override
+	/*@Override
 	public String GetQuestion() {
 		return TestList.get(index).getQuestion();
 	}
@@ -88,5 +79,14 @@ public class TestBoxDao implements ITestBoxDao {
 	public ArrayList<Answer> GetAnswers() {
 		return TestList.get(index).getAnswerList();
 	}
-    
+   
+	@Override
+	public boolean Multiple() {
+		return TestList.get(index).Multiple();
+	}*/	
+	
+	public TestUnit Get() {
+		return TestList.get(index);
+	}	
+
 }
